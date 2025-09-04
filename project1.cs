@@ -1,3 +1,19 @@
+using System;
+
+public class Program()
+{
+  public static void Main(string[] args)
+{
+    StudentGroup group1 = new StudentGroup("Team Alpha", 3);
+    group1.AddStudent("Alice", 0);
+    group1.AddStudent("Bob", 1);
+    group1.AddStudent("Charlie", 2);
+    group1.DisplayGroup();
+    Console.WriteLine(group1.GetStudent(1));
+    group1.AddStudent("Bar", -1);
+    }
+}
+
 public class StudentGroup
 {
     private string groupName;
@@ -17,15 +33,26 @@ public class StudentGroup
         if (position < 0 || position > groupSize - 1)
         {
             Console.WriteLine("Position can not be a negative number");
-            return;
         }
-
-        studentNames[position] = studentName;
+        else
+        {
+            studentNames[position] = studentName;
+        }
     }
 
     public string GetStudent(int position)
     {
-        return studentNames[position];
+        string errorMessage = "Position can not be a negative number";
+
+        if (position < 0 || position > groupSize - 1)
+        {
+            Console.WriteLine(errorMessage);
+            return errorMessage;
+        }
+        else
+        {
+            return studentNames[position];
+        }  
     }
 
     public void DisplayGroup()
@@ -33,7 +60,7 @@ public class StudentGroup
         Console.WriteLine($"Group: {groupName}");
         foreach(string name in studentNames)
         {
-            Console.WriteLine(studentNames);
+            Console.WriteLine(name);
         }
     }
 }
